@@ -1,0 +1,47 @@
+{
+  "success": true,
+  "data": [
+    {
+      "_id": "643d69a5c3f7b9001cfa094a",
+      "name": "Метеоритная булка Flex",
+      "type": "bun",
+      "proteins": 100,
+      "fat": 30,
+      "carbohydrates": 60,
+      "calories": 500,
+      "price": 1490,
+      "image": "https://code.s3.yandex.net/react/code/bun-03.png", 
+      "image_mobile": "https://code.s3.yandex.net/react/code/bun-03-mobile.png", 
+      "image_large": "https://code.s3.yandex.net/react/code/bun-03-large.png", 
+      "__v": 0
+    },
+    {
+      "_id": "643d69a5c3f7b9001cfa094e",
+      "name": "Соус тёмной материи",
+      "type": "main",
+      "proteins": 50,
+      "fat": 20,
+      "carbohydrates": 70,
+      "calories": 580,
+      "price": 850,
+      "image": "https://code.s3.yandex.net/react/code/sauce-04.png", 
+      "image_mobile": "https://code.s3.yandex.net/react/code/sauce-04-mobile.png", 
+      "image_large": "https://code.s3.yandex.net/react/code/sauce-04-large.png", 
+      "__v": 0
+    },
+    {
+      "_id": "643d69a5c3f7b9001cfa094f",
+      "name": "Галактический майонез",
+      "type": "sauce",
+      "proteins": 35,
+      "fat": 15,
+      "carbohydrates": 25,
+      "calories": 20,
+      "price": 75,
+      "image": "https://code.s3.yandex.net/react/code/sauce-01.png", 
+      "image_mobile": "https://code.s3.yandex.net/react/code/sauce-01-mobile.png", 
+      "image_large": "https://code.s3.yandex.net/react/code/sauce-01-large.png", 
+      "__v": 0
+    }
+  ]
+}
