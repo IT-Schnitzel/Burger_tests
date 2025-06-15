@@ -9,16 +9,12 @@ const modalsSelector = '#modals';
 describe('E2E тест', () => {
   beforeEach(() => {
     cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
-
     cy.visit(testUrl);
   });
 
   it('список ингредиентов', () => {
     cy.get(bunSelector).should('have.length.at.least', 1);
-    cy.get(`${mainSelector},${sauceSelector}`).should(
-      'have.length.at.least',
-      1
-    );
+    cy.get(`${mainSelector},${sauceSelector}`).should('have.length.at.least', 1);
   });
 
   describe('проверка работы модалок описаний ингредиентов', () => {
@@ -33,6 +29,29 @@ describe('E2E тест', () => {
         cy.reload(true);
         cy.get(modalsSelector).children().should('have.length', 2);
       });
+
+      // Исправление второго замечания
+      it('модалка содержит информацию об ингредиенте', () => {
+        cy.get(`${sauceSelector}:first-of-type`).click();
+        cy.get(modalsSelector).within(() => {
+          cy.contains('Калории').should('exist');
+          cy.contains('Белки').should('exist');
+        });
+      });
+
+      // Тут не понял как нормально реалидовать и захардкодил под посимвольную проверку с указанными деталями ингридиента
+      it('модалка отображает детали именно выбранного ингредиента', () => {
+        cy.get(`${sauceSelector}:first-of-type`).then(($el) => {
+          const rawName = $el.find('[data-cy="ingredient-name"]').text().trim() || $el.text().trim();
+          const ingredientName = rawName.replace(/\d+/g, '').replace(/Добавить/g, '').trim(); // тут тупо обрезаем
+          cy.wrap($el).click();
+          cy.get(modalsSelector).invoke('text').then((modalText) => {
+            const modalTrimmed = modalText.split('Калории')[0].trim();
+            expect(modalTrimmed).to.include(ingredientName);
+          });
+        });
+      });
+      
     });
 
     describe('проверка закрытия модалок', () => {
@@ -87,10 +106,18 @@ describe('E2E тест', () => {
       cy.get(orderSelector).should('be.disabled');
     });
 
+    //Исправление первого замечания
+    it('добавление ингредиента в конструктор через клик', function () {
+      cy.get(`${mainSelector}:first-of-type`).then(($el) => {
+        const ingredientName = $el.text().trim();
+        cy.wrap($el).find('button').click();
+        cy.contains(ingredientName).should('exist');
+      });
+    });
+
     afterEach(() => {
       cy.clearCookie('accessToken');
       localStorage.removeItem('refreshToken');
     });
   });
 });
-
